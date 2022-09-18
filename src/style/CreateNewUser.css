@@ -1,0 +1,59 @@
+.outerdiv{
+    background-color: #98dddaf2;
+    height: 625px;
+    padding-top: 110px;
+}
+
+#centre{
+    background-color: #0aeded9c;
+    padding-top: 50px;
+    margin-left: 34%;
+    border: 10px solid black;
+    border-radius: 100px;
+    width: 500px;
+    height: 480px;
+    z-index: 1;
+}
+
+.userNameDiv{
+    padding-top: 10px;
+}
+
+.login{
+    display: flex;
+}
+
+#signuptxt{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 280px;
+}
+
+.logIn{
+    padding-left: 30px;
+    padding-bottom: 10px;
+}
+
+#emailId{
+    border-radius: 20px;
+    margin-top: 1%;
+    margin-left: 2%;
+}
+#phoneNmber{
+    border-radius: 20px;
+    margin-left:2%;
+}
+.passwordDiv{
+    padding-bottom: 15px;
+}
+#signUpBtn{
+    border-radius: 100px;
+    margin-left: 28px;
+    width: 100px;
+    height: 50px;
+    background-color: #0aeded9c;
+    color: #e71212;
+    font-weight: bold;
+    font-size: large;
+    border-color: #0aeded9c;
+}
