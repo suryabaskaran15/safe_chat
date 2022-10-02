@@ -8,7 +8,9 @@
     border-radius: 20px;
 
 }
-
+.logindiv{
+    padding-top: 150px;
+}
 #Btn{
     border-radius: 100px;
     background-color: #0aeded9c;
@@ -24,11 +26,7 @@
     padding-top: 20px;
     padding-left: 40px;
 }
-.outerDiv{
-    background-color: #98dddaf2;
-    height: 625px;
-    padding-top: 150px;
-}
+
 .centre{
     background-color: #0aeded9c;
     padding-top: 50px;
