@@ -1,0 +1,6 @@
+.messagediv{
+    min-height: 625px;
+    width: 76%;
+    float: right;
+    /* overflow-y: auto; */
+}
