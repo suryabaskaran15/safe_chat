@@ -5,27 +5,28 @@ import '../style/genderal.css';
 import UserId from "../components/UserId";
 import Password from "../components/Password";
 import { useNavigate} from "react-router-dom";
-
+import { db } from "../firebase_db";
+import { doc, getDoc } from "firebase/firestore";
 
 const Login = ()=>{
-    const user_details_In_Db = JSON.parse(localStorage.getItem('user_details'));
     let user;
-    const check_In_Db = (id)=>{
-        user = user_details_In_Db.find(res=>res.userId == id);
+    const verification_In_db = async(id,password)=>{
+        user = (await getDoc(doc(db,'user',id))).data();
+        if(id == user.userId && password == user.Password){
+            navigate(`/${id}/messaging`);
+        }else{
+            alert("User Id not Found....!");
+        }
     }
+    
     const navigate = useNavigate();
     const verified = ()=>{
         const userId = document.getElementById('userId').value;
         const password = document.getElementById('password').value;
-        check_In_Db(userId);
-        if(userId == user.userId && password == user.Password){
-            navigate(`/${userId}/messaging`);
-        }else{
-            alert('Enter correct userId and password.....!');
-        }
+        verification_In_db(userId,password);
     }
     return(
-        <div className="outerdiv logindiv" >
+        <div className="outerdiv logindiv " >
         <center className="centre">
             <h1>Login</h1>
             <UserId/>

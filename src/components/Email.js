@@ -3,9 +3,9 @@ import {MdEmail} from "react-icons/md";
 
 const EmailId = ()=>{
     return(
-        <div class="input-container">
+        <div className="input-container">
             <MdEmail size={40} color='blue'/>
-            <input id ='emailId' type={'email'} class="col-xs-15 border border-3 border-dark"/>
+            <input id ='emailId' type={'email'} className="col-xs-15 border border-3 border-dark"/>
         </div>
     );
 }

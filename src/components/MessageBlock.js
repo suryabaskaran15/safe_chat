@@ -3,22 +3,21 @@ import SendBox from './SendBox'
 import MsgHeader from "./MsgHeader";
 import '../style/messageblock.css';
 import Messages from './Messages';
-const MessageBlock = ()=>{
+const MessageBlock = (props)=>{
      let [messages,setmessages] = useState([]);
      let [flag,setflag]= useState();
     const getMessage = (data)=>{
         messages.push(data);
         setflag(!flag);
     }
-    // debugger
     return(
-        <div class='outerdiv messagediv'>
+        <div className='outerdiv messagediv'>
             <MsgHeader/>
             <div id='messages'>
                 <ul>
                     {
                         messages.map((res)=>
-                        <li className='msg' id={res.type} name={res.msgId}>
+                        <li className='msg' id={res.type} key={res.msgId}>
                             <Messages msg={res.msg}/>
                         </li>)
                     }

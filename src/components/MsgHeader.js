@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+import React, {useContext, useState } from 'react';
 import {IoMdArrowRoundBack} from 'react-icons/io';
+import {reciverContext } from '../screen/MainScreen';
 
-class MsgHeader extends Component{
-    render(){
-        return(
-            <div class='msgHeader'>
-                <IoMdArrowRoundBack size={40}/>
-                <label id='msg-reciver'>gff</label>
-            </div>
-        );
-    }
+const MsgHeader = ()=>{
+    const reciverName = useContext(reciverContext);
+    
+    return(
+        <div className='msgHeader'>
+            <IoMdArrowRoundBack size={40}/>
+            <label id='msg-reciver'>{reciverName}</label>
+        </div>
+    );
 }
 
 export default MsgHeader;

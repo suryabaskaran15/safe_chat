@@ -3,9 +3,9 @@ import {IoIosLock} from "react-icons/io";
 
 const Password = ()=>{
     return(
-        <div class="input-container">
+        <div className="input-container">
             <IoIosLock size={40} color='blue'/>
-            <input id='password' type={"password"} class="col-xs-15 border border-3 border-dark"/> <br/>
+            <input id='password' type={"password"} className="col-xs-15 border border-3 border-dark"/> <br/>
         </div>
     );
 }

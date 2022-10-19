@@ -5,7 +5,7 @@ const PhoneNumber = ()=>{
     return(
         <div>
             <HiPhone size={35} color='blue'/>
-            <input id ='phoneNmber' type={'tel'} class="col-xs-15 border border-3 border-dark"/>
+            <input id ='phoneNmber' type={'tel'} className="col-xs-15 border border-3 border-dark"/>
         </div>
     );
 }

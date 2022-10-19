@@ -5,7 +5,7 @@ import EmailId from '../components/Email';
 import '../style/ForgotPassword.css';
 const ForgotPassword = ()=>{
     return(
-        <div class='outerdiv forgotpassworddiv'>
+        <div className='outerdiv forgotpassworddiv'>
             <center id='center'>
                 <MdError size={75} color='blue'/>
                 <h2>Forgot Password</h2>

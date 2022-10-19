@@ -1,35 +1,46 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BsFillPersonPlusFill} from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
-import { Button, Modal, ModalBody, ModalDialog, ModalFooter, ModalHeader } from 'react-bootstrap';
+import AddNewFriend from './AddNewFriend';
+import { db } from "../firebase_db";
+import { doc, getDoc } from "firebase/firestore";
+import MsgHeader from './MsgHeader';
 
-const FriendsList = ()=>{
+const FriendsList = (props)=>{
+
     const {userId} = useParams();
-    const [show,setshow] = useState(false);
-
-    const handleShow = ()=>{setshow(true)};
-    const handleClose = ()=>{setshow(false)};
+    const [show,setshow] = useState(props.show);
+    const [friendList,setfriendList] = useState([]);
+    const [flag,setflag] = useState(false);
+    const handle = (value)=>{
+        setshow(value);
+        setflag(!flag);
+    }
+    const getFriendsList = async()=>{
+            let user = (await getDoc(doc(db,'user',userId))).data();
+            setfriendList(user.friends_list);
+        }
+    useEffect(()=>{
+        getFriendsList();
+    },[flag]);
     return(
-        <div class='outerdiv friendList row '>
+        <div className='outerdiv friendList row '>
             <h2 id='ourId' className={'col container h-25 text-center rounded'}>{userId}</h2>
             <div className={"row"}>
                 <ul>
-
+                    {
+                        friendList.map((res)=>
+                            <li key={res} onClick={()=>props.get(res)} >{res}</li>
+                        )
+                    }
                 </ul>
             </div>
-            <BsFillPersonPlusFill onClick={handleShow}  size={30} class='col-12'/>
-            <Modal show={show} onHide={handleClose} size='sm'>
-                <ModalHeader closeButton className='text-center font-weight-bold  '>
-                    ADD NEW FRIEND
-                </ModalHeader>
-                <ModalBody>
-                    <input type={'text'} className='container rounded' placeholder='Enter your Friend userId' autoFocus/>
-                </ModalBody>
-                <ModalFooter className='text-center'>
-                     <Button variant='primary' onClick={handleClose}>ADD</Button>
-                </ModalFooter>
-            </Modal>
+            <BsFillPersonPlusFill onClick={()=>handle(true)}  size={30} className='col-12'/>
+            {show &&
+                <AddNewFriend display={show} get={handle}/>
+            }
+            
         </div>
     );
 }
