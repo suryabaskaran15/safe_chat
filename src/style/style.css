@@ -1,0 +1,223 @@
+.header{
+    height: 35px;
+}
+/* Login page css */
+#userId{
+    margin-left: 20px ;
+}
+#password{
+    margin-left: 14px;
+}
+.login-header{
+    padding-bottom: 35px;
+}
+.logindiv{
+    padding-top: 150px;
+    height:625px;
+}
+#Btn{
+    background-color: white;
+    border: none;
+    color: #4831D4;
+    font-weight: bolder;
+    font-size: 25px;
+    width: 100px;
+    height: 70px;
+}
+.LoginButton{
+    text-align: center;
+    padding-top: 20px;
+}
+.centreTheme{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px 10px rgb(0, 9, 12);
+    z-index: 1;
+}
+.textboxTheme{
+    border: none;
+    border-bottom: 1px solid;
+}
+.centre{
+    padding-top: 20px;
+    margin-left: 34%;
+    width: 400px;
+    height: 400px;
+}
+.lowerPortion{
+    text-align: center;
+    padding-top: 30px;
+    color: solid black;
+    font-size: large;
+}
+/* Create new css */
+#centre{
+    padding-top: 50px;
+    margin-left: 34%;
+    width: 500px;
+    height: 480px;
+}
+.creatediv{
+    padding-top: 100px;
+}
+.userNameDiv{
+    padding-top: 10px;
+}
+
+.login{
+    display: flex;
+}
+
+#signuptxt{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 280px;
+}
+
+.logIn{
+    padding-left: 30px;
+    padding-bottom: 10px;
+}
+
+#emailId{
+    margin-top: 1%;
+    margin-left: 2%;
+}
+#phoneNmber{
+    margin-left:2%;
+}
+.passwordDiv{
+    padding-bottom: 15px;
+}
+#signUpBtn{
+    margin-left: 28px;
+    width: 100px;
+    height: 50px;
+    background-color: white;
+    color: #4831D4;
+    font-weight: bold;
+    font-size: large;
+    border: none;
+}
+/* forgot password page css */
+#center{
+    padding-top: 50px;
+    margin-left: 34%;
+    width: 400px;
+    height: 400px;
+}
+.forgotpassworddiv{
+    padding-top: 130px;
+}
+a {
+    color: black;
+}
+/* main screen */
+.maindiv{
+    display: inline-flex;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+/* message block */
+.messagediv{
+    width: 1076px;
+    float: right;
+    overflow: auto;
+}
+
+/* gendral */
+.outerdiv{
+    background-color: #a7bcff;
+    min-height: 584px;
+}
+#back-btn{
+    float: left;
+}
+.msgHeader{
+display: flex;
+width: 100%;
+height: 38px;
+background-color: blue;
+}
+#msg-reciver{
+    padding-left: 450px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#send-block{
+    position:fixed;
+    top:578px;
+    width: 1080px;
+}
+#sendbox{
+    border-radius: 100px;
+    width: 1030px;
+    height: 40px;
+    resize: none;
+}
+#sendbtn{
+    float: right;
+}
+
+.friendList{
+    float: left;
+    width:297px;
+    overflow-y: hidden;
+    display: flex;
+}
+#ourId{
+    background-color: blue;
+    height: fit-content;
+}
+/* #plus{
+    margin-top: 500px;
+    margin-left: 200px;
+} */
+
+.msg{
+    font-size: large;
+    font-weight: bold;
+    padding: 0px 10px;
+    width: fit-content;
+    max-width: 600px;
+    height: fit-content;
+    list-style: none;
+    border-radius: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ourmsg{
+margin-left: auto;    
+background-color: blue;
+color: white;
+}
+.friendmsg{
+margin-right: auto;
+background-color: #9b9bbd;
+color: black;
+}
+
+.AddNewFriend{
+    background-color: white;
+    justify-content: center;
+    z-index: 1;
+    display: flex;
+}
+.menu {
+    font-size: 14px;
+    background-color: #fff;
+    border-radius: 2px;
+    padding: 5px 0 5px 0;
+    width: 70px;
+    height: auto;
+    margin: 0;
+  /* use absolute positioning  */
+    position: absolute;
+    list-style: none;
+    box-shadow: 0 0 20px 0 #ccc;
+    opacity: 1;
+    transition: opacity 0.5s linear;
+  }
