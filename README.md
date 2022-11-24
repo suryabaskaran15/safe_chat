@@ -1,2 +1,2 @@
 # safe_chat
-chat application in web
+Web application for messaging
