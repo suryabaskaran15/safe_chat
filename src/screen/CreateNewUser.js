@@ -1,9 +1,9 @@
 import React,{useEffect,useState} from 'react';
-import '../style/CreateNewUser.css';
 import UserId from '../components/UserId';
 import Password from '../components/Password';
 import EmailId from '../components/Email';
 import PhoneNumber from '../components/Phone';
+import {RiLoginBoxFill} from "react-icons/ri";
 import { getDoc, doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase_db';
 
@@ -24,8 +24,12 @@ const CreateNewUser = ()=>{
             phoneNmber: document.getElementById('phoneNmber').value,
             Password: document.getElementById('password').value,
             friends_list : [],
-            messages : []
         });
+            document.getElementById('userId').value = "";
+            document.getElementById('emailId').value ="";
+            document.getElementById('phoneNmber').value ="";
+            document.getElementById('password').value ="";
+
     }
     catch(err){
         console.log(err);
@@ -45,12 +49,14 @@ const CreateNewUser = ()=>{
     }
     return(
         <div className="outerdiv creatediv">
-            <center id="centre">
+            <center id="centre" className="centreTheme">
                 <h1 id="signuptxt">Sign Up</h1>
                 <section className="login">
                 <h6 className="logIn">
                     Already have account ?   
-                <a href='/'>Log In</a>
+                <a href='/'>
+                <RiLoginBoxFill size={20} color="#4831D4"/>
+                </a>
                 </h6>
                 </section>
                 <form >

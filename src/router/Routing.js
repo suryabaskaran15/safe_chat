@@ -10,7 +10,7 @@ const Routing = ()=>{
             <Route path="/" element={<Login/>} />
             <Route path = "/Create" element ={<CreateNewUser/>} />
             <Route path='/ForgotPassword' element={<ForgotPassword/>}/>
-            <Route path='/:userId/messaging' element={<MainScreen/>}/>
+            <Route path='/:userId/messaging/:reciver' element={<MainScreen/>}/>
         </Routes>
     );
 }

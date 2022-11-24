@@ -2,11 +2,10 @@ import React from 'react';
 import {MdError,MdEmail} from "react-icons/md";
 import {BiArrowBack} from 'react-icons/bi';
 import EmailId from '../components/Email';
-import '../style/ForgotPassword.css';
 const ForgotPassword = ()=>{
     return(
         <div className='outerdiv forgotpassworddiv'>
-            <center id='center'>
+            <center id='center' className='centreTheme'>
                 <MdError size={75} color='blue'/>
                 <h2>Forgot Password</h2>
                 <p>

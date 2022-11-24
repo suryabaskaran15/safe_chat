@@ -4,8 +4,8 @@ import { FaUserAlt } from "react-icons/fa";
 const UserId = ()=>{
     return(
         <div className="input-container">
-            <FaUserAlt size={33} color='blue'/>
-            <input id='userId' type={'text'} className="border-bottom border-dark"/>
+            <FaUserAlt size={33} color= "#4831D4"/>
+            <input id='userId' type={'text'} className="border-bottom border-dark textboxTheme"/>
         </div>
     );
 }

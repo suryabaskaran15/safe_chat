@@ -1,4 +1,4 @@
-import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
@@ -13,9 +13,19 @@ const AddNewFriend = (props) => {
         props.get(val);
     }
     const add_to_db = async(id) => {
+        const verify = (await getDoc(doc(db,'user',id))).data();
+        if(verify){
         await updateDoc(doc(db,'user',userId), {
             friends_list: arrayUnion(id)
         });
+        // await setDoc(doc(db, "user", userId,"messages",id),{
+        //     messages : []
+        // })
+        props.add();
+        }
+        else{
+            alert('No frd found.pls enter correct id...!');
+        }
     }
     return (
         <Modal show={show} onHide={() => handle(false)} size='sm'>
