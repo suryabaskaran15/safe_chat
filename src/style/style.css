@@ -1,3 +1,7 @@
+body,
+html {
+  height: 100%;
+}
 .header {
   height: 35px;
   display: flex;
@@ -119,22 +123,22 @@ a {
 }
 /* main screen */
 .maindiv {
-  display: inline-flex;
+  display: inline;
   overflow-y: hidden;
   overflow-x: hidden;
+  cursor: pointer;
 }
 
 /* message block */
 .messagediv {
-  width: 1090px;
-  float: right;
+  width: 81.5%;
   overflow: auto;
 }
 
 /* gendral */
 .outerdiv {
   background-color: #a7bcff;
-  min-height: 656px;
+  min-height: 100vh;
 }
 #back-btn {
   float: left;
@@ -168,11 +172,9 @@ a {
 
 .friendList {
   float: left;
-  width: 297px;
+  width: 20%;
   overflow-y: auto;
   overflow-x: hidden;
-  display: flex;
-  cursor: pointer;
 }
 #ourId {
   background-color: blue;
@@ -302,4 +304,12 @@ a {
 }
 .space-between {
   margin: 10px;
+}
+.update-Btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+button:hover {
+  background-color: #9b9bbd;
 }

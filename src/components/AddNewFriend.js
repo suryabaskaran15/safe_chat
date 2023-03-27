@@ -36,6 +36,7 @@ const AddNewFriend = (props) => {
       dbReport = {
         friendName: doc.data().userName,
         friendUid: doc.data().uid,
+        friendUrl: doc.data().photoURL,
       };
     });
     return dbReport;
@@ -45,10 +46,18 @@ const AddNewFriend = (props) => {
 
     if (userDetails) {
       await updateDoc(doc(db, "user", auth.currentUser.uid), {
-        friendList: arrayUnion(name),
+        friendList: arrayUnion({
+          name: userDetails.friendName,
+          uid: userDetails.friendUid,
+          url: userDetails.friendUrl,
+        }),
       });
       await updateDoc(doc(db, "user", userDetails.friendUid), {
-        friendList: arrayUnion(auth.currentUser.displayName),
+        friendList: arrayUnion({
+          name: auth.currentUser.displayName,
+          uid: auth.currentUser.uid,
+          url: auth.currentUser.photoURL,
+        }),
       });
       await setDoc(
         doc(

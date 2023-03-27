@@ -25,7 +25,6 @@ const FriendsList = (props) => {
   const [friendList, setfriendList] = useState([]);
   const [flag, setflag] = useState(false);
   const [anchorPosition, setAnchorPosition] = useState(null);
-  const [images, setImages] = useState([]);
   const handle = (value) => {
     setshow(value);
   };
@@ -36,22 +35,8 @@ const FriendsList = (props) => {
   const getFriendsList = onSnapshot(
     doc(db, "user", userCredentials.uid),
     (doc) => {
-      let data = doc.data().friendList;
-      let imageList = [];
-      data.map(async (res) => {
-        await getDocs(
-          query(collection(db, "user"), where("userName", "==", res))
-        ).then((user) => {
-          user.forEach((res) => {
-            console.log("res", res.data());
-            imageList.push({
-              userName: res.data().userName,
-              url: res.data().photoURL,
-            });
-          });
-        });
-      });
-      console.log("image", imageList);
+      // console.log(doc.data().friendList); too mush of render
+      setfriendList(doc.data().friendList);
     }
   );
 
@@ -79,16 +64,15 @@ const FriendsList = (props) => {
       </h2>
       <ul>
         {friendList?.map((res) => {
-          console.log("resp", res);
           return (
             <div className="friend">
               <img src={res.url} alt="" className="friendImg" />
               <li
                 className="col-12 friendId"
-                key={res.userName}
-                onClick={() => props.get(res.userName)}
+                key={res.name}
+                onClick={() => props.get(res.name)}
               >
-                {res.userName}
+                {res.name}
               </li>
             </div>
           );

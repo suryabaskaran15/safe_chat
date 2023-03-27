@@ -5,12 +5,15 @@ import { MdAddAPhoto } from "react-icons/md";
 import { doc, getDoc } from "firebase/firestore";
 const Profile = () => {
   const [phoneNum, setPhoneNum] = useState("");
-
+  const [updateDetails, setUpdateDetails] = useState("");
   const userDetails = async () => {
     setPhoneNum(
       await (await getDoc(doc(db, "user", auth.currentUser.uid))).data()
         .phoneNumber
     );
+  };
+  const update_profile = (e) => {
+    e.preventDefault();
   };
   useEffect(() => {
     userDetails();
@@ -19,9 +22,8 @@ const Profile = () => {
     <div className="profile-setting">
       <h2 className="setting-main-lable">Profile</h2>
       <div>
-        <form>
+        <form onSubmit={update_profile}>
           <img src={auth.currentUser.photoURL} className="Img" />
-
           <UploadPhoto />
           <h4 className="inline-block">User Name </h4>
           <input
@@ -44,8 +46,8 @@ const Profile = () => {
             value={phoneNum}
           />
           <br />
-          <button type="submit" id="Btn" className="">
-            Update
+          <button type="submit" id="Btn" className="update-Btn">
+            update
           </button>
         </form>
       </div>
