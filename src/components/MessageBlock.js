@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  useRef,
-} from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import SendBox from "./SendBox";
 import MsgHeader from "./MsgHeader";
 import Messages from "./Messages";
@@ -25,7 +20,7 @@ const MessageBlock = (props) => {
   // const reciverName = useContext(reciverContext);
   const [messages, setmessages] = useState([]);
   const [flag, setflag] = useState();
-  const [reciverUid,setReciverUid] = useState(null);
+  const [reciverUid, setReciverUid] = useState(null);
   const getUserCredentials = async () => {
     let reciverUid;
     const reciverCredendials = await getDocs(
@@ -45,6 +40,7 @@ const MessageBlock = (props) => {
       doc(db, "user", auth.currentUser.uid, "messages", reciver_Uid),
       (doc) => {
         setmessages(Object?.values(doc.data()));
+        console.log("message", doc.data());
       }
     );
     setflag(!flag);

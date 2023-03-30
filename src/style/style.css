@@ -157,17 +157,18 @@ a {
 
 #send-block {
   position: fixed;
-  top: 580px;
-  width: 1080px;
+  bottom: 0;
+  display: flex;
+  width: 1200px;
 }
 #sendbox {
   border-radius: 100px;
-  width: 1030px;
+  width: 100%;
   height: 40px;
   resize: none;
 }
 #sendbtn {
-  float: right;
+  right: 0;
 }
 
 .friendList {

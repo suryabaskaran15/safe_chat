@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BsFillPersonPlusFill, BsThreeDotsVertical } from "react-icons/bs";
 import AddNewFriend from "./AddNewFriend";
-import { auth, db } from "../firebase_db";
+import { auth, db, storage } from "../firebase_db";
 import {
   collection,
   doc,
@@ -12,17 +12,16 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import man from "../assets/man.png";
 import { Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { async } from "@firebase/util";
+import { getDownloadURL, ref } from "firebase/storage";
 const FriendsList = (props) => {
   const userCredentials = auth.currentUser;
   const userId = userCredentials.displayName;
   const dp = userCredentials.photoURL;
   const navigate = useNavigate();
   const [show, setshow] = useState();
-  const [friendList, setfriendList] = useState([]);
+  const [friends, setFriends] = useState([]);
   const [flag, setflag] = useState(false);
   const [anchorPosition, setAnchorPosition] = useState(null);
   const handle = (value) => {
@@ -31,14 +30,31 @@ const FriendsList = (props) => {
   const added = () => {
     setflag(!flag);
   };
+  const getFriendsList = async () => {
+    const friendsList = await onSnapshot(
+      doc(db, "user", userCredentials.uid),
+      async (doc) => {
+        const friendsData = doc.data().friendList;
 
-  const getFriendsList = onSnapshot(
-    doc(db, "user", userCredentials.uid),
-    (doc) => {
-      // console.log(doc.data().friendList); too mush of render
-      setfriendList(doc.data().friendList);
-    }
-  );
+        let friendWithImage = [];
+        friendsData.map(async (data) => {
+          console.log(data);
+          getDownloadURL(
+            ref(storage, `${data.uid}/profilePic/profilePic`)
+          ).then((url) => {
+            console.log("url", url);
+            friendWithImage.push({
+              uid: data.uid,
+              name: data.name,
+              url: url,
+            });
+          });
+        });
+        setFriends(friendWithImage);
+        console.log("friendWithImage", friendWithImage);
+      }
+    );
+  };
 
   useEffect(() => {
     getFriendsList();
@@ -63,9 +79,10 @@ const FriendsList = (props) => {
         />
       </h2>
       <ul>
-        {friendList?.map((res) => {
+        {friends?.map((res) => {
           return (
             <div className="friend">
+              {console.log("friendList", friends)}
               <img src={res.url} alt="" className="friendImg" />
               <li
                 className="col-12 friendId"

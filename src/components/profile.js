@@ -3,9 +3,12 @@ import UploadPhoto from "./uploadPhoto";
 import { auth, db } from "../firebase_db";
 import { MdAddAPhoto } from "react-icons/md";
 import { doc, getDoc } from "firebase/firestore";
+import { Input } from "@mui/material";
 const Profile = () => {
   const [phoneNum, setPhoneNum] = useState("");
   const [updateDetails, setUpdateDetails] = useState("");
+  const [userName, setUserName] = useState(auth.currentUser.displayName);
+  const [email, setEmail] = useState(auth.currentUser.email);
   const userDetails = async () => {
     setPhoneNum(
       await (await getDoc(doc(db, "user", auth.currentUser.uid))).data()
@@ -17,6 +20,7 @@ const Profile = () => {
   };
   useEffect(() => {
     userDetails();
+    console.log("updateDetails", updateDetails);
   }, []);
   return (
     <div className="profile-setting">
@@ -29,14 +33,20 @@ const Profile = () => {
           <input
             type={"text"}
             className="border-bottom border-dark textboxTheme space-between"
-            value={auth.currentUser.displayName}
+            value={userName}
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
           />
           <br />
           <h4 className="inline-block">Email Id </h4>
           <input
             type={"text"}
             className="border-bottom border-dark textboxTheme space-between"
-            value={auth.currentUser.email}
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <br />
           <h4 className="inline-block"> phone Number </h4>
@@ -44,6 +54,9 @@ const Profile = () => {
             type={"tel"}
             className="border-bottom border-dark textboxTheme space-between"
             value={phoneNum}
+            onChange={(e) => {
+              setPhoneNum(e.target.value);
+            }}
           />
           <br />
           <button type="submit" id="Btn" className="update-Btn">
