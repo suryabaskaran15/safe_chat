@@ -146,8 +146,12 @@ a {
 .msgHeader {
   display: flex;
   width: 100%;
-  height: 38px;
+  height: 50px;
   background-color: blue;
+}
+.imageAndName {
+  display: flex;
+  margin: auto;
 }
 #msg-reciver {
   padding-left: 450px;
@@ -179,7 +183,7 @@ a {
 }
 #ourId {
   background-color: blue;
-  height: fit-content;
+  height: 50px;
 }
 /* #plus{
     margin-top: 500px;

@@ -13,14 +13,14 @@ const MainScreen = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [val, setval] = useState("Welcome");
-  const getVal = (name) => {
-    setval(name);
-    navigate(`/${auth.currentUser.displayName}/messaging/${name}`);
+  const getVal = (frdDetails) => {
+    setval(frdDetails);
+    navigate(`/${auth.currentUser.displayName}/messaging/${frdDetails.name}`);
   };
   // console.log(Timestamp.now().toDate());
   console.log("current user", auth.currentUser);
   return (
-    <userContext.Provider value={location.state}>
+    <userContext.Provider value={val}>
       <div className="header">
         <div id="app-title" className="text-center">
           SAFE CHAT

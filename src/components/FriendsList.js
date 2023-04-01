@@ -15,6 +15,7 @@ import {
 import { Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { getDownloadURL, ref } from "firebase/storage";
+import unknowDp from "../assets/profile.png";
 const FriendsList = (props) => {
   const userCredentials = auth.currentUser;
   const userId = userCredentials.displayName;
@@ -31,14 +32,15 @@ const FriendsList = (props) => {
     setflag(!flag);
   };
   const getFriendsList = async () => {
+    console.log("1.getFriendsList");
     const friendsList = await onSnapshot(
       doc(db, "user", userCredentials.uid),
       async (doc) => {
         const friendsData = doc.data().friendList;
-
+        console.log("2.friendsData", friendsData);
         let friendWithImage = [];
         friendsData.map(async (data) => {
-          console.log(data);
+          console.log("3.data", data);
           getDownloadURL(
             ref(storage, `${data.uid}/profilePic/profilePic`)
           ).then((url) => {
@@ -50,15 +52,17 @@ const FriendsList = (props) => {
             });
           });
         });
-        setFriends(friendWithImage);
-        console.log("friendWithImage", friendWithImage);
+        await setFriends(friendWithImage);
+        console.log("4.friendWithImage", friendWithImage);
+        console.log("5.friends", friends);
       }
     );
   };
 
   useEffect(() => {
+    console.log("useEffect");
     getFriendsList();
-  }, []); //flag in array
+  }, [flag]); //flag in array
   return (
     <div className="outerdiv friendList row ">
       <h2 id="ourId" className="col-12 container text-center">
@@ -83,11 +87,15 @@ const FriendsList = (props) => {
           return (
             <div className="friend">
               {console.log("friendList", friends)}
-              <img src={res.url} alt="" className="friendImg" />
+              <img
+                src={res.url ? res.url : unknowDp}
+                alt=""
+                className="friendImg"
+              />
               <li
                 className="col-12 friendId"
                 key={res.name}
-                onClick={() => props.get(res.name)}
+                onClick={() => props.get(res)}
               >
                 {res.name}
               </li>
