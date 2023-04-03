@@ -59,13 +59,6 @@ const CreateNewUser = () => {
   };
   const createAccount = async (event) => {
     event.preventDefault();
-    console.log(
-      event.target[0].value,
-      event.target[1].value,
-      event.target[2].value,
-      event.target[3].value,
-      event.target[4].value
-    );
     setuser({
       userName: event.target[0].value,
       email: event.target[1].value,
@@ -84,38 +77,29 @@ const CreateNewUser = () => {
           .then(async (response) => {
             console.log("user", user);
             console.log("authentication created :", response);
-
-            await uploadBytes(
-              ref(storage, `${auth.currentUser.uid}/profilePic/profilePic`),
-              event.target[4].files[0]
-            ).then((res) => {
-              getDownloadURL(
-                ref(storage, `${auth.currentUser.uid}/profilePic/profilePic`)
-              ).then(async (url) => {
-                console.log(
-                  "Photo url genarated : ",
-                  url,
-                  auth.currentUser.uid
-                );
-                await updateProfile(auth.currentUser, {
-                  displayName: event.target[0].value,
-                  photoURL: url,
+            await updateProfile(auth.currentUser, {
+              displayName: event.target[0].value,
+            });
+            if (event.target[4].files[0]) {
+              await uploadBytes(
+                ref(storage, `${auth.currentUser.uid}/profilePic/profilePic`),
+                event.target[4].files[0]
+              ).then((res) => {
+                getDownloadURL(
+                  ref(storage, `${auth.currentUser.uid}/profilePic/profilePic`)
+                ).then(async (url) => {
+                  await updateProfile(auth.currentUser, {
+                    photoURL: url,
+                  });
                 });
-                console.log(
-                  "Profile Updated",
-                  auth.currentUser.uid,
-                  "  ",
-                  user
-                );
-                await setDoc(doc(db, "user", auth.currentUser.uid), {
-                  uid: auth.currentUser.uid,
-                  userName: event.target[0].value,
-                  phoneNumber: event.target[2].value,
-                  friendList: [],
-                  photoURL: url,
-                });
-                console.log("document created", auth.currentUser);
               });
+            }
+            await setDoc(doc(db, "user", auth.currentUser.uid), {
+              uid: auth.currentUser.uid,
+              userName: event.target[0].value,
+              phoneNumber: event.target[2].value,
+              friendList: [],
+              photoURL: auth.currentUser.photoURL,
             });
           })
           .then(() => navigate("/"))

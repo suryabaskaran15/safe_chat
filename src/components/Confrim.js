@@ -31,7 +31,7 @@ const Confrim = (props) => {
     ).data();
     setMsgDetails(msg[details.msgId]);
     setAlteredMsg(msg[details.msgId].msg);
-    console.log(msg);
+    console.log("msg[details.msgId]", msg[details.msgId]);
   };
   // please check no edit option for friend's message  ****
   const editMsg = async () => {
@@ -110,7 +110,8 @@ const Confrim = (props) => {
         >
           Cancel
         </Button>
-        {details.option === "delete" && msgDetails.from === userId ? (
+        {details.option === "delete" &&
+        msgDetails?.from == auth.currentUser.displayName ? (
           <Button
             onClick={() => {
               deleteMsg("both");

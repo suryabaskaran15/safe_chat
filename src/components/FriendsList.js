@@ -52,8 +52,8 @@ const FriendsList = (props) => {
             });
           });
         });
-        await setFriends(friendWithImage);
         console.log("4.friendWithImage", friendWithImage);
+        setFriends(friendWithImage);
         console.log("5.friends", friends);
       }
     );
