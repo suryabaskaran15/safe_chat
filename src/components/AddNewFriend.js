@@ -44,6 +44,7 @@ const AddNewFriend = (props) => {
     const userDetails = await getDetails(name);
 
     if (userDetails) {
+      console.log(userDetails);
       await updateDoc(doc(db, "user", auth.currentUser.uid), {
         friendList: arrayUnion({
           name: userDetails.friendName,
