@@ -1,12 +1,11 @@
 import React, { createContext, useState } from "react";
 import FriendsList from "../components/FriendsList";
 import MessageBlock from "../components/MessageBlock";
+import Header from "../components/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/style.css";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { auth } from "../firebase_db";
-import { signOut } from "firebase/auth";
-import { Timestamp } from "firebase/firestore";
 
 export const userContext = createContext();
 const MainScreen = () => {
@@ -21,17 +20,7 @@ const MainScreen = () => {
   console.log("current user", auth.currentUser);
   return (
     <userContext.Provider value={val}>
-      <div className="header">
-        <div id="app-title" className="text-center">
-          SAFE CHAT
-        </div>
-        <span
-          id="signout"
-          onClick={() => signOut(auth).then(() => navigate("/"))}
-        >
-          signOut
-        </span>
-      </div>
+      <Header />
       <div className="maindiv">
         <FriendsList get={getVal} />
         <MessageBlock />

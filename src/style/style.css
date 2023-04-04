@@ -1,13 +1,14 @@
 body,
 html {
   height: 100%;
+  cursor: pointer;
 }
 .header {
   height: 35px;
   display: flex;
 }
 #app-title {
-  float: left;
+  margin: auto;
 }
 /* Login page css */
 #userId {
@@ -238,7 +239,7 @@ a {
   cursor: pointer;
 }
 #signout {
-  float: right;
+  right: 0;
 }
 #uploadPic {
   margin-left: 45%;

@@ -15,7 +15,7 @@ import {
 import { Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { getDownloadURL, ref } from "firebase/storage";
-import unknowDp from "../assets/man.png";
+import unknowDp from "../assets/profile.png";
 const FriendsList = (props) => {
   const userCredentials = auth.currentUser;
   const userId = userCredentials.displayName;
@@ -41,30 +41,28 @@ const FriendsList = (props) => {
         let friendWithImage = [];
         friendsData.map(async (data) => {
           console.log("3.data", data);
-          getDownloadURL(
-            ref(storage, `${data.uid}/profilePic/profilePic`)
-          ).then((url) => {
-            console.log("url", url);
-            friendWithImage.push({
-              uid: data.uid,
-              name: data.name,
-              url: url,
-            });
-          })
-          .catch(()=>{
-            friendWithImage.push({
-              uid: data.uid,
-              name: data.name,
-              url: null,
+          getDownloadURL(ref(storage, `${data.uid}/profilePic/profilePic`))
+            .then((url) => {
+              console.log("url", url);
+              friendWithImage.push({
+                uid: data.uid,
+                name: data.name,
+                url: url,
+              });
             })
-          }
-          )
+            .catch(() => {
+              friendWithImage.push({
+                uid: data.uid,
+                name: data.name,
+                url: null,
+              });
+            });
         });
         console.log("4.friendWithImage", friendWithImage);
-        setTimeout(()=>{
+        setTimeout(() => {
           setFriends(friendWithImage);
-        },1000)
-        
+        }, 1000);
+
         console.log("5.friends", friends);
       }
     );

@@ -44,6 +44,7 @@ const ContextMenu = (props) => {
           Copy
         </MenuItem>
         <MenuItem
+          // hidden={true}
           onClick={() => {
             setConfrimDetails({
               show: true,
@@ -55,14 +56,18 @@ const ContextMenu = (props) => {
         >
           Edit
         </MenuItem>
-        <MenuItem onClick={()=>{
+        <MenuItem
+          onClick={() => {
             setConfrimDetails({
               show: true,
               option: "delete",
               msgId: props.children.key,
             });
             handleClose();
-            }}>Delete</MenuItem>
+          }}
+        >
+          Delete
+        </MenuItem>
       </Menu>
       {confrimDetails.show && (
         <Confrim
