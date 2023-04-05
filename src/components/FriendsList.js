@@ -121,6 +121,7 @@ const FriendsList = (props) => {
       {anchorPosition !== null && (
         <Menu
           open={anchorPosition !== null}
+          onClose={() => setAnchorPosition(null)}
           anchorReference="anchorPosition"
           anchorPosition={
             anchorPosition !== null

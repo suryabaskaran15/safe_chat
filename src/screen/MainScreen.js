@@ -16,7 +16,7 @@ const MainScreen = () => {
     setval(frdDetails);
     navigate(`/${auth.currentUser.displayName}/messaging/${frdDetails.name}`);
   };
-  // console.log(Timestamp.now().toDate());
+
   console.log("current user", auth.currentUser);
   return (
     <userContext.Provider value={val}>

@@ -1,6 +1,7 @@
 import { Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import Confrim from "./Confrim.js";
+import { auth } from "../firebase_db.js";
 const ContextMenu = (props) => {
   const [contextMenu, setContextMenu] = useState(null);
   const [confrimDetails, setConfrimDetails] = useState({});
@@ -21,7 +22,7 @@ const ContextMenu = (props) => {
   const handleClose = () => {
     setContextMenu(null);
   };
-  console.log(props);
+  console.log("props", props);
   return (
     <div onContextMenu={handleContextMenu} style={{ cursor: "context-menu" }}>
       {props.children}
@@ -44,7 +45,7 @@ const ContextMenu = (props) => {
           Copy
         </MenuItem>
         <MenuItem
-          // hidden={true}
+          hidden={props.from != auth.currentUser.displayName && true}
           onClick={() => {
             setConfrimDetails({
               show: true,

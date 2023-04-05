@@ -17,7 +17,7 @@ import ContextMenu from "./ContextMenu";
 const MessageBlock = (props) => {
   const { userId, reciver } = useParams();
   const scrollDown = useRef();
-  // const reciverName = useContext(reciverContext);
+  // const reciverName = useContext(userContext);
   const [messages, setmessages] = useState([]);
   const [flag, setflag] = useState();
   const [reciverUid, setReciverUid] = useState(null);
@@ -61,7 +61,7 @@ const MessageBlock = (props) => {
               className={res.from == userId ? "msg ourmsg" : "msg friendmsg"}
               key={res.msgId}
             >
-              <ContextMenu reciverUid={reciverUid}>
+              <ContextMenu reciverUid={reciverUid} from={res.from}>
                 <Messages key={res.msgId} msg={res.msg} />
               </ContextMenu>
             </li>
