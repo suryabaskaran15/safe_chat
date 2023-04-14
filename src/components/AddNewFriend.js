@@ -19,6 +19,7 @@ import {
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { auth, db } from "../firebase_db";
+import { getUserDetails } from "../util/function_Module";
 
 const AddNewFriend = (props) => {
   const { userId } = useParams();
@@ -41,17 +42,17 @@ const AddNewFriend = (props) => {
     return dbReport;
   };
   const add_to_db = async (name) => {
-    const userDetails = await getDetails(name);
+    const userDetails = await getUserDetails(name);
 
     if (userDetails) {
       console.log(userDetails);
       await updateDoc(doc(db, "user", auth.currentUser.uid), {
         friendList: arrayUnion({
-          name: userDetails.friendName,
-          uid: userDetails.friendUid,
+          name: userDetails.userName,
+          uid: userDetails.uid,
         }),
       });
-      await updateDoc(doc(db, "user", userDetails.friendUid), {
+      await updateDoc(doc(db, "user", userDetails.uid ), {
         friendList: arrayUnion({
           name: auth.currentUser.displayName,
           uid: auth.currentUser.uid,
@@ -63,7 +64,7 @@ const AddNewFriend = (props) => {
           "user",
           auth.currentUser.uid,
           "messages",
-          userDetails.friendUid
+          userDetails.uid
         ),
         {}
       );
@@ -71,7 +72,7 @@ const AddNewFriend = (props) => {
         doc(
           db,
           "user",
-          userDetails.friendUid,
+          userDetails.uid,
           "messages",
           auth.currentUser.uid
         ),

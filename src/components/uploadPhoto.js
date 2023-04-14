@@ -6,7 +6,7 @@ const UploadPhoto = () => {
   return (
     <div className="input-container ">
       <MdAddAPhoto size={40} color="#4831D4" />
-      <input
+      <input 
         type="file"
         className="profile-pic textboxTheme"
         id="profilePic"

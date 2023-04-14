@@ -33,7 +33,6 @@ const Confrim = (props) => {
     setAlteredMsg(msg[details.msgId].msg);
     console.log("msg[details.msgId]", msg[details.msgId]);
   };
-  // please check no edit option for friend's message  ****
   const editMsg = async () => {
     await updateDoc(
       doc(db, "user", auth.currentUser.uid, "messages", details.reciverUid),

@@ -75,7 +75,7 @@ const FriendsList = (props) => {
   return (
     <div className="outerdiv friendList row ">
       <h2 id="ourId" className="col-12 container text-center">
-        <img src={dp} className="friendImg" />
+        <img src={dp ? dp : unknowDp} className="friendImg" />
         {userId}
         <BsThreeDotsVertical
           className="menu-main"
@@ -95,7 +95,6 @@ const FriendsList = (props) => {
         {friends?.map((res) => {
           return (
             <div className="friend">
-              {console.log("friendList", friends)}
               <img
                 src={res.url ? res.url : unknowDp}
                 alt=""

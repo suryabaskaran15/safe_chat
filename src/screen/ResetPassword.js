@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import { IoIosLock } from "react-icons/io";
 import { auth } from "../firebase_db";
 import Password from "../components/Password";
+import { Button } from "@mui/material";
 
 const ResetPassword = () => {
   const FormRef = useRef();
@@ -33,9 +34,9 @@ const ResetPassword = () => {
         <form ref={FormRef} onSubmit={updatePassword}>
           <Password placeHolder={"New password"} />
           <Password placeHolder={"Confrim password"} />
-          <button id="Btn" type="submit">
-            Reset Password
-          </button>
+          <Button id="Btn" type="submit">
+            Reset
+          </Button>
         </form>
       </center>
     </div>

@@ -7,6 +7,7 @@ const MsgHeader = () => {
   const reciverName = useContext(userContext);
   const { reciver } = useParams();
   const navigate = useNavigate();
+  console.log("reciverName",reciverName);
   return (
     <div className="msgHeader">
       <IoMdArrowRoundBack

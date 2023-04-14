@@ -256,6 +256,7 @@ a {
   border-radius: 50px;
 }
 .friendId {
+  font-size: large;
   list-style: none;
   padding: 9px;
 }
@@ -318,4 +319,8 @@ a {
 }
 button:hover {
   background-color: #9b9bbd;
+}
+li:hover{
+  opacity: 0.5;
+  z-index: 3;
 }

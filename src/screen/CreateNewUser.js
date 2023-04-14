@@ -23,6 +23,7 @@ import {
   uploadBytes,
   uploadBytesResumable,
 } from "firebase/storage";
+import { getUserDetails } from "../util/function_Module";
 
 const CreateNewUser = () => {
   const [user, setuser] = useState({});
@@ -44,19 +45,7 @@ const CreateNewUser = () => {
       );
     });
   };
-  const verifyUserName = async (event) => {
-    const dbResponse = await getDocs(
-      query(
-        collection(db, "user"),
-        where("userName", "==", FormRef.current.userId.value)
-      )
-    );
-    let response;
-    dbResponse.forEach((doc) => {
-      response = doc.exists();
-    });
-    return response;
-  };
+  
   const createAccount = async (event) => {
     event.preventDefault();
     setuser({
@@ -66,7 +55,7 @@ const CreateNewUser = () => {
       password: event.target[3].value,
       profilePic: event.target[4].files[0],
     });
-    await verifyUserName(event).then(async (res) => {
+    await getUserDetails(event.target[0].value).then(async (res) => {
       if (res != true) {
         console.log(user);
         await createUserWithEmailAndPassword(

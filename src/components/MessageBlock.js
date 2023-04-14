@@ -12,35 +12,28 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "../firebase_db";
 import { useParams } from "react-router-dom";
-import { reciverContext } from "../screen/MainScreen";
+import { reciverContext, userContext } from "../screen/MainScreen";
 import ContextMenu from "./ContextMenu";
+import { getUserDetails } from "../util/function_Module";
 const MessageBlock = (props) => {
   const { userId, reciver } = useParams();
   const scrollDown = useRef();
-  // const reciverName = useContext(userContext);
+  const reciverDetails = useContext(userContext);
   const [messages, setmessages] = useState([]);
   const [flag, setflag] = useState();
   const [reciverUid, setReciverUid] = useState(null);
-  const getUserCredentials = async () => {
-    let reciverUid;
-    const reciverCredendials = await getDocs(
-      query(collection(db, "user"), where("userName", "==", reciver))
-    );
-    reciverCredendials.forEach((doc) => {
-      reciverUid = doc.data().uid;
-    });
-    setReciverUid(reciverUid);
-    return reciverUid;
-  };
-  let reciver_Uid;
+  
   const getMessage = async () => {
-    reciver_Uid = await getUserCredentials();
+    // const reciver_Uid = await getUserDetails(reciver);
+    // console.log(reciver_Uid)
+    // setReciverUid(reciver_Uid.uid);
     setmessages([]);
     const getMsg = onSnapshot(
-      doc(db, "user", auth.currentUser.uid, "messages", reciver_Uid),
+      doc(db, "user", auth.currentUser.uid, "messages", reciverDetails.uid),
       (doc) => {
-        setmessages(Object?.values(doc.data()));
-        console.log("message", doc.data());
+        const sortedMessages = Object?.values(doc.data()).sort((date1,date2)=> date1.time - date2.time);
+        console.log("sortedMessages",sortedMessages);
+        setmessages(sortedMessages);
       }
     );
     setflag(!flag);
@@ -48,9 +41,8 @@ const MessageBlock = (props) => {
   };
 
   useEffect(() => {
-    getUserCredentials();
     getMessage();
-  }, [reciver]);
+  }, [reciverDetails.uid]);
   return (
     <div className="outerdiv messagediv">
       <MsgHeader />
@@ -58,10 +50,10 @@ const MessageBlock = (props) => {
         <ul>
           {messages?.map((res) => (
             <li
-              className={res.from == userId ? "msg ourmsg" : "msg friendmsg"}
+              className={res.from == auth.currentUser.uid ? "msg ourmsg" : "msg friendmsg"}
               key={res.msgId}
             >
-              <ContextMenu reciverUid={reciverUid} from={res.from}>
+              <ContextMenu reciverUid={reciverDetails.uid} from={res.from}>
                 <Messages key={res.msgId} msg={res.msg} />
               </ContextMenu>
             </li>
@@ -69,7 +61,7 @@ const MessageBlock = (props) => {
         </ul>
         <span ref={scrollDown}></span>
       </div>
-      <SendBox get={getMessage} getUserDetails={getUserCredentials} />
+      <SendBox get={getMessage}  />
     </div>
   );
 };
